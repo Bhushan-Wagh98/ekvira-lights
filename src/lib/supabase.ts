@@ -14,7 +14,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 
 // Server-side Supabase client with service role key (only use in API routes/server components)
 export const supabaseAdmin = typeof window === 'undefined'
-  ? createClient<Database>(
+  ? createClient(
       supabaseUrl,
       process.env.SUPABASE_SERVICE_ROLE_KEY || '',
       {
