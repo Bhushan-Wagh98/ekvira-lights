@@ -39,8 +39,8 @@ export default function AdminPage() {
       }
 
       // Check if user is admin
-      const { data: userData, error: userError } = await supabase
-        .from('users')
+      const { data: userData, error: userError } = await (supabase
+        .from('users') as any)
         .select('role')
         .eq('email', data.user.email)
         .single();
