@@ -5,7 +5,6 @@ import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, Globe } from 'lucide-react';
-import { cn } from '@/utils';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
