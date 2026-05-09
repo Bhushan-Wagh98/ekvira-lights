@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { supabase } from '@/lib/supabase';
-import { LogOut, MessageSquare, Image, CheckCircle, Trash2, MessageCircle, Clock, ChevronDown } from 'lucide-react';
+import { LogOut, MessageSquare, Image, CheckCircle, Trash2, MessageCircle, Clock } from 'lucide-react';
 
 export default function DashboardPage() {
   const locale = useLocale();
