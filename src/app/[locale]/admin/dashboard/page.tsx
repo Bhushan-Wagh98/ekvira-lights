@@ -44,7 +44,7 @@ export default function DashboardPage() {
   };
 
   const updateStatus = async (id: string, status: string) => {
-    await supabase.from('inquiries').update({ status }).eq('id', id);
+    await supabase.from('inquiries').update({ status } as any).eq('id', id);
     setInquiries(prev => prev.map(i => i.id === id ? { ...i, status } : i));
   };
 
