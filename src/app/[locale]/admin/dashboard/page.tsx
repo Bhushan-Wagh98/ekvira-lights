@@ -50,13 +50,13 @@ export default function DashboardPage() {
 
   const deleteInquiry = async (id: string) => {
     if (!confirm('Delete this inquiry?')) return;
-    await supabase.from('inquiries').delete().eq('id', id);
+    await (supabase.from('inquiries') as any).delete().eq('id', id);
     setInquiries(prev => prev.filter(i => i.id !== id));
   };
 
   const addGalleryItem = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await supabase.from('gallery').insert({
+    const { error } = await (supabase.from('gallery') as any).insert({
       ...galleryForm,
       is_featured: false,
       order_index: gallery.length + 1,
@@ -70,7 +70,7 @@ export default function DashboardPage() {
 
   const deleteGalleryItem = async (id: string) => {
     if (!confirm('Delete this gallery item?')) return;
-    await supabase.from('gallery').delete().eq('id', id);
+    await (supabase.from('gallery') as any).delete().eq('id', id);
     setGallery(prev => prev.filter(g => g.id !== id));
   };
 
@@ -78,7 +78,7 @@ export default function DashboardPage() {
     if (!businessInfo) return;
     setSavingInfo(true);
     setSaveStatus('idle');
-    const { error } = await supabase.from('business_info').update({
+    const { error } = await (supabase.from('business_info') as any).update({
       phone: businessInfo.phone,
       email: businessInfo.email,
       address: businessInfo.address,
