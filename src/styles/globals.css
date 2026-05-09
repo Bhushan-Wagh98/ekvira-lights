@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 95%;
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 10% 8%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 280 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 10% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 10% 15%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 240 10% 4%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+    --ring: 280 100% 60%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative px-8 py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, hsl(280, 100%, 60%), hsl(320, 100%, 50%));
+    box-shadow: 0 0 20px hsla(280, 100%, 60%, 0.4), 0 0 60px hsla(280, 100%, 60%, 0.1);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 30px hsla(280, 100%, 60%, 0.6), 0 0 80px hsla(280, 100%, 60%, 0.2);
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 rounded-xl font-bold transition-all duration-300 border-2;
+    border-color: hsla(180, 100%, 50%, 0.5);
+    color: hsl(180, 100%, 50%);
+    background: hsla(180, 100%, 50%, 0.05);
+  }
+  .btn-secondary:hover {
+    background: hsla(180, 100%, 50%, 0.15);
+    box-shadow: 0 0 20px hsla(180, 100%, 50%, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .card-hover {
+    @apply transition-all duration-500;
+  }
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px hsla(280, 100%, 60%, 0.2), 0 0 30px hsla(180, 100%, 50%, 0.1);
+  }
+
+  .gradient-bg {
+    background: radial-gradient(ellipse at top, hsla(280, 100%, 60%, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, hsla(180, 100%, 50%, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, hsla(320, 100%, 50%, 0.1) 0%, transparent 50%),
+                hsl(240, 10%, 4%);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(180, 100%, 60%), hsl(320, 100%, 60%));
+  }
+
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-28 lg:py-32;
+  }
+
+  .glow-card {
+    @apply relative rounded-2xl overflow-hidden;
+    background: hsla(240, 10%, 10%, 0.8);
+    border: 1px solid hsla(280, 100%, 60%, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  .glow-card:hover {
+    border-color: hsla(280, 100%, 60%, 0.5);
+    box-shadow: 0 0 30px hsla(280, 100%, 60%, 0.15), inset 0 0 30px hsla(280, 100%, 60%, 0.05);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px hsla(280, 100%, 60%, 0.8), 0 0 40px hsla(280, 100%, 60%, 0.4), 0 0 80px hsla(280, 100%, 60%, 0.2);
+  }
+
+  .neon-cyan {
+    text-shadow: 0 0 10px hsla(180, 100%, 50%, 0.8), 0 0 40px hsla(180, 100%, 50%, 0.4);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-neon {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(280, 100%, 60%) hsl(240, 10%, 8%);
+  }
+}
+
+/* === ANIMATIONS === */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes beam-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  25%, 75% { opacity: 0.9; }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes spotlight {
+  0% { transform: translateX(-100%) rotate(15deg); }
+  100% { transform: translateX(200%) rotate(15deg); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-beam {
+  animation: beam-rotate 8s linear infinite;
+}
+
+.animate-flicker {
+  animation: flicker 3s ease-in-out infinite;
+}
+
+.animate-slide-left {
+  animation: slide-in-left 0.8s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slide-in-right 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.6s ease-out forwards;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Spotlight sweep effect */
+.spotlight-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsla(280, 100%, 60%, 0.1), transparent);
+  animation: spotlight 4s ease-in-out infinite;
+}
+
+/* Particle background */
+.particles-bg {
+  position: relative;
+}
+.particles-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, hsla(280, 100%, 70%, 0.3), transparent),
+    radial-gradient(2px 2px at 40% 70%, hsla(180, 100%, 60%, 0.3), transparent),
+    radial-gradient(2px 2px at 60% 20%, hsla(320, 100%, 60%, 0.3), transparent),
+    radial-gradient(2px 2px at 80% 50%, hsla(280, 100%, 70%, 0.3), transparent),
+    radial-gradient(1px 1px at 10% 80%, hsla(180, 100%, 60%, 0.2), transparent),
+    radial-gradient(1px 1px at 90% 10%, hsla(320, 100%, 60%, 0.2), transparent),
+    radial-gradient(1px 1px at 50% 50%, hsla(280, 100%, 70%, 0.2), transparent);
+  animation: pulse-glow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Marathi font */
+.font-marathi {
+  font-family: 'Noto Sans Devanagari', system-ui, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .mobile-padding {
+    @apply px-4 py-2;
+  }
+  .mobile-text {
+    @apply text-sm leading-relaxed;
+  }
+}
+
+/* Loading skeleton */
+.loading-skeleton {
+  @apply animate-pulse rounded;
+  background: hsla(240, 10%, 20%, 0.5);
+}
+
+/* Focus states */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+  --tw-ring-color: hsl(280, 100%, 60%);
+}
+
+/* === NEON SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(240, 10%, 6%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(280, 100%, 60%), hsl(320, 100%, 50%));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(280, 100%, 70%), hsl(180, 100%, 50%));
+  box-shadow: 0 0 10px hsla(280, 100%, 60%, 0.5);
+}
+
+/* Mobile: hide scrollbar for cleaner look, show on scroll */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}

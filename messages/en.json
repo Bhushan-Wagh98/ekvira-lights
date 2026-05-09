@@ -1,0 +1,103 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "success": "Success!",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "home": "Home",
+    "contact": "Contact",
+    "about": "About",
+    "services": "Services",
+    "gallery": "Gallery",
+    "admin": "Admin"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Our Lights",
+    "gallery": "Gallery",
+    "contact": "Contact Us",
+    "admin": "Admin Panel",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Ekvira Lights — DJ Lights on Rent",
+    "subtitle": "Sharpy, Blinder, Bottom & Laser lights available on rent for weddings, parties, DJ nights, and all occasions.",
+    "cta": "Book Now",
+    "cta_secondary": "See Our Lights"
+  },
+  "services": {
+    "title": "Lights Available on Rent",
+    "subtitle": "High-quality DJ lights for every occasion",
+    "sharpy": {
+      "title": "Sharpy Lights",
+      "description": "Powerful beam lights with sharp, focused beams. Perfect for creating dramatic aerial effects at any event."
+    },
+    "blinder": {
+      "title": "Blinder Lights",
+      "description": "High-intensity audience blinder lights that create stunning flash effects and energy bursts on the dance floor."
+    },
+    "bottom": {
+      "title": "Bottom Lights",
+      "description": "LED uplighting and floor wash lights that set the mood with vibrant colors from the ground up."
+    },
+    "laser": {
+      "title": "Laser Lights",
+      "description": "Multi-color laser lights with patterns and effects that transform any venue into a visual spectacle."
+    }
+  },
+  "contact": {
+    "title": "Book Lights for Your Event",
+    "subtitle": "Tell us your event date and which lights you need. We'll handle the rest.",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "service": "Which Lights?",
+      "event_date": "Event Date",
+      "message": "Event Details (venue, occasion, etc.)",
+      "submit": "Send Inquiry"
+    },
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "hours": "Available"
+    }
+  },
+  "admin": {
+    "login": {
+      "title": "Admin Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Login",
+      "error": "Invalid credentials"
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "inquiries": "Bookings",
+      "gallery": "Manage Gallery",
+      "content": "Content Management",
+      "settings": "Settings"
+    }
+  },
+  "gallery": {
+    "title": "Our Setups",
+    "subtitle": "See our lights in action at recent events",
+    "categories": {
+      "all": "All",
+      "wedding": "Weddings",
+      "party": "Parties",
+      "corporate": "Corporate",
+      "stage": "Stage Shows"
+    }
+  }
+}
