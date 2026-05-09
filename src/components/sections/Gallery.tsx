@@ -22,8 +22,8 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       const { supabase } = await import('@/lib/supabase');
-      const { data } = await supabase
-        .from('gallery')
+      const { data } = await (supabase
+        .from('gallery') as any)
         .select('*')
         .order('order_index', { ascending: true });
       if (data) setGalleryItems(data);

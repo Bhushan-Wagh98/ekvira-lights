@@ -23,7 +23,7 @@ const Contact = () => {
   useEffect(() => {
     const fetchBiz = async () => {
       const { supabase } = await import('@/lib/supabase');
-      const { data } = await supabase.from('business_info').select('*').single();
+      const { data } = await (supabase.from('business_info') as any).select('*').single();
       if (data) setBiz(data);
     };
     fetchBiz();
@@ -36,7 +36,7 @@ const Contact = () => {
     try {
       const { supabase } = await import('@/lib/supabase');
 
-      const { error } = await supabase.from('inquiries').insert({
+      const { error } = await (supabase.from('inquiries') as any).insert({
         name: formData.name,
         email: formData.email || 'not provided',
         phone: formData.phone,

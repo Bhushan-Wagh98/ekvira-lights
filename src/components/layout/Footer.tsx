@@ -14,7 +14,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchBiz = async () => {
       const { supabase } = await import('@/lib/supabase');
-      const { data } = await supabase.from('business_info').select('*').single();
+      const { data } = await (supabase.from('business_info') as any).select('*').single();
       if (data) setBiz(data);
     };
     fetchBiz();
