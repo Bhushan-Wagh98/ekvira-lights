@@ -40,12 +40,34 @@ export default function InquiriesPage() {
           <div className="bg-white/5 border border-white/10 rounded-xl p-8 text-center text-gray-500">No inquiries yet.</div>
         ) : (
           inquiries.map((inq) => (
-            <div key={inq.id} className="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-6">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div className="space-y-1">
+            <div key={inq.id} className="bg-white/5 border border-white/10 rounded-xl p-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="space-y-0.5">
                   <h3 className="text-white font-semibold">{inq.name}</h3>
-                  <p className="text-gray-400 text-sm">{inq.phone} • {inq.service}</p>
-                  <p className="text-gray-500 text-xs">{inq.message}</p>
+                  <p className="text-gray-400 text-sm">{inq.phone}</p>
+                  <p className="text-xs text-gray-400 mt-1">
+                    {(() => {
+                      const lines = inq.message ? inq.message.split('\n').filter((l: string) => l.trim()) : [];
+                      const dateLine = lines.find((l: string) => l.includes('Event Date') || l.includes('📅'));
+                      const detailsLine = lines.find((l: string) => l.includes('Event Details') || l.includes('📝'));
+                      const lightsLine = lines.find((l: string) => (l.includes('Lights') || l.includes('🎯')) && !l.includes('Event'));
+                      const otherLines = lines.filter((l: string) => l !== dateLine && l !== detailsLine && l !== lightsLine);
+                      const ordered = [dateLine, detailsLine, lightsLine, ...otherLines].filter(Boolean);
+                      return ordered.map((line: string, i: number) => {
+                        const hasLabel = line.startsWith('🎯') || line.startsWith('📅') || line.startsWith('📝') || line.startsWith('Lights:') || line.startsWith('Event Date:') || line.startsWith('Event Details:');
+                        return (
+                          <span key={i}>
+                            {hasLabel ? (
+                              <><span className="text-purple-400 font-semibold">{line.split(':')[0]}:</span>{line.split(':').slice(1).join(':')}</>
+                            ) : (
+                              <><span className="text-purple-400 font-semibold">Event Details:</span> {line}</>
+                            )}
+                            {i < ordered.length - 1 && <span className="text-gray-600"> &nbsp;•&nbsp; </span>}
+                          </span>
+                        );
+                      });
+                    })()}
+                  </p>
                   <p className="text-gray-600 text-xs">{new Date(inq.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">

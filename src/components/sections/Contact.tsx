@@ -37,12 +37,23 @@ const Contact = () => {
     try {
       const { supabase } = await import('@/lib/supabase');
 
+      const selectedLights = formData.service ? formData.service.split(',') : [];
+      const lightNames = selectedLights.map(s => {
+        const found = lights.find(l => l.value === s);
+        return found ? found.label : s;
+      }).join(', ');
+      const serviceValue = selectedLights.length === 1 ? selectedLights[0] : selectedLights.length > 1 ? 'full_setup' : 'other';
+
       const { error } = await (supabase.from('inquiries') as any).insert({
         name: formData.name,
         email: formData.email || 'not provided',
         phone: formData.phone,
-        service: formData.service,
-        message: `Event Date: ${formData.event_date}\n${formData.message}`,
+        service: serviceValue,
+        message: [
+          `📅 Event Date: ${new Date(formData.event_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}`,
+          formData.message ? `📝 Event Details: ${formData.message}` : '',
+          `🎯 Lights: ${lightNames || 'Not specified'}`,
+        ].filter(Boolean).join('\n'),
         status: 'new',
       });
 
@@ -64,11 +75,11 @@ const Contact = () => {
   };
 
   const lights = [
-    { label: 'Sharpy Lights', value: 'sharpy' },
-    { label: 'Blinder Lights', value: 'blinder' },
-    { label: 'Bottom Lights', value: 'bottom' },
-    { label: 'Laser Lights', value: 'laser' },
-    { label: 'Full Setup (All Lights)', value: 'full_setup' },
+    { label: locale === 'mr' ? 'शार्पी लाइट्स' : 'Sharpy Lights', value: 'sharpy' },
+    { label: locale === 'mr' ? 'ब्लाइंडर लाइट्स' : 'Blinder Lights', value: 'blinder' },
+    { label: locale === 'mr' ? 'बॉटम लाइट्स' : 'Bottom Lights', value: 'bottom' },
+    { label: locale === 'mr' ? 'लेझर लाइट्स' : 'Laser Lights', value: 'laser' },
+    { label: locale === 'mr' ? 'फुल सेटअप (सर्व लाइट्स)' : 'Full Setup (All Lights)', value: 'full_setup' },
   ];
 
   return (
@@ -108,7 +119,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-neon-purple/50 focus:ring-1 focus:ring-neon-purple/50 focus:outline-none transition-all"
-                    placeholder="Your name"
+                    placeholder={locale === 'mr' ? 'तुमचे नाव' : 'Your name'}
                   />
                 </div>
                 <div>
@@ -120,7 +131,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-neon-purple/50 focus:ring-1 focus:ring-neon-purple/50 focus:outline-none transition-all"
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 XXXXX XXXXX"
                   />
                 </div>
               </div>
@@ -128,18 +139,26 @@ const Contact = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">{t('form.service')}</label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white focus:border-neon-purple/50 focus:ring-1 focus:ring-neon-purple/50 focus:outline-none transition-all"
-                  >
-                    <option value="" className="bg-gray-900">Select lights</option>
+                  <div className="space-y-2">
                     {lights.map((light) => (
-                      <option key={light.value} value={light.value} className="bg-gray-900">{light.label}</option>
+                      <label key={light.value} className="flex items-center space-x-3 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={formData.service.split(',').includes(light.value)}
+                          onChange={(e) => {
+                            const current = formData.service ? formData.service.split(',') : [];
+                            if (e.target.checked) {
+                              setFormData(prev => ({ ...prev, service: [...current, light.value].join(',') }));
+                            } else {
+                              setFormData(prev => ({ ...prev, service: current.filter(s => s !== light.value).join(',') }));
+                            }
+                          }}
+                          className="w-4 h-4 rounded border-white/20 bg-white/5 text-neon-purple focus:ring-neon-purple/50"
+                        />
+                        <span className="text-gray-300 text-sm">{light.label}</span>
+                      </label>
                     ))}
-                  </select>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">{t('form.event_date')}</label>
@@ -162,7 +181,7 @@ const Contact = () => {
                   onChange={handleChange}
                   rows={4}
                   className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-neon-purple/50 focus:ring-1 focus:ring-neon-purple/50 focus:outline-none transition-all resize-none"
-                  placeholder="Venue, occasion, number of lights needed..."
+                  placeholder={locale === 'mr' ? 'व्हेन्यू, प्रसंग, लाइट्सची संख्या...' : 'Venue, occasion, number of lights needed...'}
                 />
               </div>
 
@@ -177,12 +196,12 @@ const Contact = () => {
 
               {status === 'success' && (
                 <p className="text-green-400 text-sm text-center bg-green-500/10 border border-green-500/20 rounded-lg py-3">
-                  ✓ Inquiry sent! We'll contact you soon.
+                  {locale === 'mr' ? '✓ चौकशी पाठवली! आम्ही लवकरच संपर्क करू.' : '✓ Inquiry sent! We’ll contact you soon.'}
                 </p>
               )}
               {status === 'error' && (
                 <p className="text-red-400 text-sm text-center bg-red-500/10 border border-red-500/20 rounded-lg py-3">
-                  Failed to send. Please try WhatsApp or call directly.
+                  {locale === 'mr' ? 'पाठवण्यात अयशस्वी. WhatsApp किंवा कॉल करा.' : 'Failed to send. Please try WhatsApp or call directly.'}
                 </p>
               )}
             </form>
