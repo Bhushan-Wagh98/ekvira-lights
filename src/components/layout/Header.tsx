@@ -35,8 +35,8 @@ const Header = () => {
 
   const navigation = [
     { name: t('navigation.home'), href: `/${locale}` },
-    { name: t('navigation.services'), href: `/${locale}#services` },
     { name: t('navigation.gallery'), href: `/${locale}#gallery` },
+    { name: t('navigation.services'), href: `/${locale}#services` },
     { name: 'Reviews', href: `/${locale}#reviews` },
     { name: 'Instagram', href: `/${locale}#instagram` },
     { name: t('navigation.contact'), href: `/${locale}#contact` },
@@ -49,7 +49,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${visible ? 'translate-y-0' : '-translate-y-full'} ${scrolled ? 'bg-background/95 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${visible ? 'translate-y-0' : '-translate-y-full'} ${scrolled || isMenuOpen ? 'bg-background/95 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20' : 'bg-transparent'}`}>
       <nav className="container mx-auto container-padding py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -112,8 +112,8 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-white/10">
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
+          <div className="pb-4 border-t border-white/10">
             <div className="flex flex-col space-y-4 pt-4">
               {navigation.map((item) => (
                 <Link
@@ -141,7 +141,7 @@ const Header = () => {
               </a>
             </div>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );
