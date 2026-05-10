@@ -10,10 +10,11 @@ const InstagramEmbed = ({ url }: { url: string }) => {
   const embedUrl = url.replace(/\?.*$/, '') + 'embed';
 
   return (
-    <div className="rounded-xl overflow-hidden border border-white/10 hover:border-neon-pink/50 transition-all">
+    <div className="rounded-xl overflow-hidden border border-white/10 hover:border-neon-pink/50 transition-all leading-[0]" style={{ maxHeight: '650px' }}>
       <iframe
         src={embedUrl}
-        className="w-full border-0" style={{ height: '720px' }}
+        className="w-full border-0 block"
+        style={{ height: '700px', marginBottom: '-50px' }}
         scrolling="no"
         allowFullScreen
         loading="lazy"
