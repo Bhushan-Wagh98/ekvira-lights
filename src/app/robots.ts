@@ -1,5 +1,9 @@
 import { MetadataRoute } from 'next';
 
+/**
+ * Robots.txt configuration
+ * Allows all crawlers, blocks admin and API routes from indexing.
+ */
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {

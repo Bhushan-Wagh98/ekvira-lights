@@ -10,10 +10,13 @@ const InstagramEmbed = ({ url }: { url: string }) => {
   const embedUrl = url.replace(/\?.*$/, '') + 'embed';
 
   return (
-    <div className="rounded-xl overflow-hidden border border-white/10 hover:border-neon-pink/50 transition-all leading-[0]" style={{ maxHeight: '650px' }}>
+    <div
+      className="overflow-hidden rounded-xl border border-white/10 leading-[0] transition-all hover:border-neon-pink/50"
+      style={{ maxHeight: '650px' }}
+    >
       <iframe
         src={embedUrl}
-        className="w-full border-0 block"
+        className="block w-full border-0"
         style={{ height: '700px', marginBottom: '-50px' }}
         scrolling="no"
         allowFullScreen
@@ -45,35 +48,43 @@ const InstagramPosts = () => {
   if (posts.length === 0) return null;
 
   return (
-    <section id="instagram" className="section-padding relative" style={{ background: 'hsl(240, 10%, 4%)' }}>
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-pink/50 to-transparent" />
+    <section
+      id="instagram"
+      className="section-padding relative"
+      style={{ background: 'hsl(240, 10%, 4%)' }}
+    >
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-neon-pink/50 to-transparent" />
 
-      <div className="container mx-auto container-padding relative z-10">
+      <div className="container-padding container relative z-10 mx-auto">
         <FadeUp>
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className={cn(
-              "text-4xl md:text-5xl font-black text-white mb-6",
-              locale === 'mr' ? 'font-marathi' : ''
-            )}>
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <h2
+              className={cn(
+                'mb-6 text-4xl font-black text-white md:text-5xl',
+                locale === 'mr' ? 'font-marathi' : ''
+              )}
+            >
               <span className="text-gradient">{t('title')}</span>
             </h2>
-            <p className={cn(
-              "text-lg text-gray-400",
-              locale === 'mr' ? 'font-marathi' : ''
-            )}>
+            <p
+              className={cn(
+                'text-lg text-gray-400',
+                locale === 'mr' ? 'font-marathi' : ''
+              )}
+            >
               {t('subtitle')}
             </p>
           </div>
         </FadeUp>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map(post => (
             <InstagramEmbed key={post.id} url={post.post_url} />
           ))}
         </div>
 
         <FadeUp delay={0.2}>
-          <div className="text-center mt-10">
+          <div className="mt-10 text-center">
             <a
               href="https://www.instagram.com/reel/DYH4YEqTyta/?igsh=OHY3dmFjbnZsemgw"
               target="_blank"

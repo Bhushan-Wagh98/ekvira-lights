@@ -6,8 +6,12 @@ import { cn } from '@/utils';
 import Preloader from '@/components/ui/Preloader';
 import '@/styles/globals.css';
 
+// --- Font Configuration ---
+
+// Inter: Primary English font (loaded from Google Fonts CDN)
 const inter = Inter({ subsets: ['latin'] });
 
+// Hind: Local Devanagari font - used globally for both English & Marathi
 const hind = localFont({
   src: [
     { path: '../../fonts/Hind-Light.ttf', weight: '300' },
@@ -19,16 +23,19 @@ const hind = localFont({
   variable: '--font-hind',
 });
 
+// Jaini: Decorative font used only for the brand logo "एकवीरा लाइट्स"
 const jaini = localFont({
   src: '../../fonts/Jaini-Regular.ttf',
   variable: '--font-jaini',
 });
 
+// --- JSON-LD Structured Data for Google SEO ---
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: 'Ekvira Lights',
-  description: 'DJ Lights on Rent - Sharpy, Blinder, Bottom & Laser lights for weddings, parties, and events.',
+  description:
+    'DJ Lights on Rent - Sharpy, Blinder, Bottom & Laser lights for weddings, parties, and events.',
   url: 'https://ekviralights.com',
   telephone: '+917721873991',
   address: {
@@ -52,9 +59,13 @@ const jsonLd = {
   sameAs: [],
 };
 
+/**
+ * Root Layout
+ * Wraps all pages with fonts, i18n provider, preloader, and SEO metadata.
+ */
 export default async function RootLayout({
   children,
-  params: { locale }
+  params: { locale },
 }: {
   children: React.ReactNode;
   params: { locale: string };
@@ -69,6 +80,7 @@ export default async function RootLayout({
         <meta name="theme-color" content="#0a0a0f" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/logo.svg" />
+        {/* Structured data for Google rich results */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

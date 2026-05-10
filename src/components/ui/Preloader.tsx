@@ -66,13 +66,15 @@ const Preloader = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-[#a855f7] to-[#ec4899] rounded-2xl flex items-center justify-center shadow-[0_0_40px_hsla(280,100%,60%,0.4)]">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#a855f7] to-[#ec4899] shadow-[0_0_40px_hsla(280,100%,60%,0.4)]">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
             </div>
           </motion.div>
 
           {/* Progress bar */}
-          <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+          <div className="h-1 w-48 overflow-hidden rounded-full bg-white/10">
             <motion.div
               className="h-full rounded-full bg-gradient-to-r from-[#a855f7] via-[#ec4899] to-[#06b6d4]"
               initial={{ width: '0%' }}
@@ -83,7 +85,7 @@ const Preloader = () => {
           </div>
 
           {/* Text */}
-          <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
+          <p className="mt-4 text-xs uppercase tracking-widest text-gray-500">
             Ekvira Lights
           </p>
         </motion.div>

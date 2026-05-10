@@ -3,7 +3,14 @@
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  Youtube,
+} from 'lucide-react';
 import WhatsAppIcon from '@/components/ui/WhatsAppIcon';
 import { cn } from '@/utils';
 
@@ -15,7 +22,9 @@ const Footer = () => {
   useEffect(() => {
     const fetchBiz = async () => {
       const { supabase } = await import('@/lib/supabase');
-      const { data } = await (supabase.from('business_info') as any).select('*').single();
+      const { data } = await (supabase.from('business_info') as any)
+        .select('*')
+        .single();
       if (data) setBiz(data);
     };
     fetchBiz();
@@ -44,40 +53,63 @@ const Footer = () => {
 
   return (
     <footer className="relative" style={{ background: 'hsl(240, 10%, 3%)' }}>
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-purple/30 to-transparent" />
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-neon-purple/30 to-transparent" />
 
-      <div className="container mx-auto container-padding py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="container-padding container mx-auto py-16">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-neon-purple to-neon-pink rounded-xl flex items-center justify-center shadow-[0_0_20px_hsla(280,100%,60%,0.3)]">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple to-neon-pink shadow-[0_0_20px_hsla(280,100%,60%,0.3)]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white font-jaini">एकवीरा लाइट्स</h3>
+                <h3 className="font-jaini text-lg font-bold text-white">
+                  एकवीरा लाइट्स
+                </h3>
                 <p className="text-xs text-neon-cyan">DJ Lights on Rent</p>
               </div>
             </div>
-            <p className={cn(
-              "text-gray-500 leading-relaxed text-sm",
-              locale === 'mr' ? 'font-marathi' : ''
-            )}>
-              {locale === 'mr' ? 'लग्न, पार्टी आणि सर्व प्रसंगांसाठी शार्पी, ब्लाइंडर, बॉटम आणि लेझर लाइट्स भाड्याने उपलब्ध.' : 'Sharpy, Blinder, Bottom & Laser lights on rent for weddings, parties, and all events.'}
+            <p
+              className={cn(
+                'text-sm leading-relaxed text-gray-500',
+                locale === 'mr' ? 'font-marathi' : ''
+              )}
+            >
+              {locale === 'mr'
+                ? 'लग्न, पार्टी आणि सर्व प्रसंगांसाठी शार्पी, ब्लाइंडर, बॉटम आणि लेझर लाइट्स भाड्याने उपलब्ध.'
+                : 'Sharpy, Blinder, Bottom & Laser lights on rent for weddings, parties, and all events.'}
             </p>
             <div className="flex space-x-3">
               {biz?.social_links?.facebook && (
-                <a href={biz.social_links.facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-white/5 border border-white/10 hover:border-neon-purple/50 hover:bg-neon-purple/10 rounded-lg flex items-center justify-center transition-all">
+                <a
+                  href={biz.social_links.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-all hover:border-neon-purple/50 hover:bg-neon-purple/10"
+                >
                   <Facebook className="h-4 w-4 text-gray-400" />
                 </a>
               )}
               {biz?.social_links?.instagram && (
-                <a href={biz.social_links.instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-white/5 border border-white/10 hover:border-neon-pink/50 hover:bg-neon-pink/10 rounded-lg flex items-center justify-center transition-all">
+                <a
+                  href={biz.social_links.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-all hover:border-neon-pink/50 hover:bg-neon-pink/10"
+                >
                   <Instagram className="h-4 w-4 text-gray-400" />
                 </a>
               )}
               {biz?.social_links?.youtube && (
-                <a href={biz.social_links.youtube} target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-white/5 border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 rounded-lg flex items-center justify-center transition-all">
+                <a
+                  href={biz.social_links.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-all hover:border-red-500/50 hover:bg-red-500/10"
+                >
                   <Youtube className="h-4 w-4 text-gray-400" />
                 </a>
               )}
@@ -85,7 +117,7 @@ const Footer = () => {
                 href={`https://wa.me/${(whatsapp || '').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-white/5 border border-white/10 hover:border-green-500/50 hover:bg-green-500/10 rounded-lg flex items-center justify-center transition-all"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-all hover:border-green-500/50 hover:bg-green-500/10"
               >
                 <WhatsAppIcon className="h-4 w-4 text-gray-400" />
               </a>
@@ -94,11 +126,16 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">{locale === 'mr' ? 'लिंक्स' : 'Quick Links'}</h4>
+            <h4 className="mb-6 text-sm font-bold uppercase tracking-wider text-white">
+              {locale === 'mr' ? 'लिंक्स' : 'Quick Links'}
+            </h4>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
+              {quickLinks.map(link => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-gray-500 hover:text-neon-purple transition-colors text-sm">
+                  <Link
+                    href={link.href}
+                    className="text-sm text-gray-500 transition-colors hover:text-neon-purple"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -108,11 +145,13 @@ const Footer = () => {
 
           {/* Lights */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">{t('navigation.services')}</h4>
+            <h4 className="mb-6 text-sm font-bold uppercase tracking-wider text-white">
+              {t('navigation.services')}
+            </h4>
             <ul className="space-y-3">
-              {lights.map((light) => (
+              {lights.map(light => (
                 <li key={light}>
-                  <span className="text-gray-500 text-sm">{light}</span>
+                  <span className="text-sm text-gray-500">{light}</span>
                 </li>
               ))}
             </ul>
@@ -120,33 +159,53 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">{t('navigation.contact')}</h4>
+            <h4 className="mb-6 text-sm font-bold uppercase tracking-wider text-white">
+              {t('navigation.contact')}
+            </h4>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <Phone className="h-4 w-4 text-neon-purple flex-shrink-0 mt-0.5" />
+                <Phone className="mt-0.5 h-4 w-4 flex-shrink-0 text-neon-purple" />
                 <div className="flex flex-wrap gap-x-1 text-sm">
-                  {(phone || '').split(',').map((p: string, i: number, arr: string[]) => (
-                    <span key={p.trim()}>
-                      <a href={`tel:${p.trim()}`} className="text-gray-400 hover:text-white transition-colors">{p.trim()}</a>
-                      {i < arr.length - 1 && <span className="text-gray-600">,</span>}
-                    </span>
-                  ))}
+                  {(phone || '')
+                    .split(',')
+                    .map((p: string, i: number, arr: string[]) => (
+                      <span key={p.trim()}>
+                        <a
+                          href={`tel:${p.trim()}`}
+                          className="text-gray-400 transition-colors hover:text-white"
+                        >
+                          {p.trim()}
+                        </a>
+                        {i < arr.length - 1 && (
+                          <span className="text-gray-600">,</span>
+                        )}
+                      </span>
+                    ))}
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <Mail className="h-4 w-4 text-neon-cyan flex-shrink-0 mt-0.5" />
+                <Mail className="mt-0.5 h-4 w-4 flex-shrink-0 text-neon-cyan" />
                 <div className="flex flex-wrap gap-x-1 text-sm">
-                  {(email || '').split(',').map((e: string, i: number, arr: string[]) => (
-                    <span key={e.trim()}>
-                      <a href={`mailto:${e.trim()}`} className="text-gray-400 hover:text-white transition-colors">{e.trim()}</a>
-                      {i < arr.length - 1 && <span className="text-gray-600">,</span>}
-                    </span>
-                  ))}
+                  {(email || '')
+                    .split(',')
+                    .map((e: string, i: number, arr: string[]) => (
+                      <span key={e.trim()}>
+                        <a
+                          href={`mailto:${e.trim()}`}
+                          className="text-gray-400 transition-colors hover:text-white"
+                        >
+                          {e.trim()}
+                        </a>
+                        {i < arr.length - 1 && (
+                          <span className="text-gray-600">,</span>
+                        )}
+                      </span>
+                    ))}
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <MapPin className="h-4 w-4 text-neon-pink flex-shrink-0 mt-0.5" />
-                <p className="text-gray-400 text-sm">{address}</p>
+                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-neon-pink" />
+                <p className="text-sm text-gray-400">{address}</p>
               </div>
             </div>
           </div>
@@ -154,11 +213,16 @@ const Footer = () => {
       </div>
 
       <div className="border-t border-white/5">
-        <div className="container mx-auto container-padding py-6 flex justify-between items-center">
-          <p className="text-gray-600 text-sm">
+        <div className="container-padding container mx-auto flex items-center justify-between py-6">
+          <p className="text-sm text-gray-600">
             © {new Date().getFullYear()} Ekvira Lights. All rights reserved.
           </p>
-          <a href={`/${locale}/admin`} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-500 text-xs transition-colors">
+          <a
+            href={`/${locale}/admin`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-gray-700 transition-colors hover:text-gray-500"
+          >
             Admin
           </a>
         </div>

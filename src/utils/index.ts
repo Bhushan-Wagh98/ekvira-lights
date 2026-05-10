@@ -90,15 +90,15 @@ export function calculateLighting(
   };
 
   const baseLumens = lumensPerSqFt[roomType] || 30;
-  
+
   // Adjust for ceiling height
   const heightMultiplier = ceilingHeight > 9 ? 1.2 : 1;
-  
+
   const totalLumens = roomSize * baseLumens * heightMultiplier;
-  
+
   // Estimate number of fixtures (assuming 800 lumens per fixture)
   const fixtures = Math.ceil(totalLumens / 800);
-  
+
   // Estimate cost (₹500-2000 per fixture)
   const estimatedCost = fixtures * 1250;
 
@@ -150,17 +150,17 @@ export function getOptimizedImageUrl(
   height?: number
 ): string {
   if (!url) return '/images/placeholder.jpg';
-  
+
   // If it's a Cloudinary URL, add transformations
   if (url.includes('cloudinary.com')) {
     const transformations = [];
     if (width) transformations.push(`w_${width}`);
     if (height) transformations.push(`h_${height}`);
     transformations.push('c_fill', 'f_auto', 'q_auto');
-    
+
     return url.replace('/upload/', `/upload/${transformations.join(',')}/`);
   }
-  
+
   return url;
 }
 

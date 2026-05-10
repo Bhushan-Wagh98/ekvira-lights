@@ -18,7 +18,9 @@ export default function AdminPage() {
   useEffect(() => {
     const checkSession = async () => {
       const { supabase } = await import('@/lib/supabase');
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (session) {
         router.push(`/${locale}/admin/dashboard`);
       } else {
@@ -36,10 +38,12 @@ export default function AdminPage() {
     try {
       const { supabase } = await import('@/lib/supabase');
 
-      const { data, error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { data, error: authError } = await supabase.auth.signInWithPassword(
+        {
+          email,
+          password,
+        }
+      );
 
       if (authError) {
         setError(authError.message || t('error'));
@@ -48,8 +52,9 @@ export default function AdminPage() {
       }
 
       // Check if user is admin
-      const { data: userData, error: userError } = await (supabase
-        .from('users') as any)
+      const { data: userData, error: userError } = await (
+        supabase.from('users') as any
+      )
         .select('role')
         .eq('email', data.user.email)
         .single();
@@ -58,7 +63,9 @@ export default function AdminPage() {
 
       if (userError) {
         // If RLS blocks the query, check by email as fallback
-        const adminEmails = [process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'wagh.bhushan.998@gmail.com'];
+        const adminEmails = [
+          process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'wagh.bhushan.998@gmail.com',
+        ];
         if (!adminEmails.includes(data.user.email || '')) {
           setError('Access denied. Admin only.');
           await supabase.auth.signOut();
@@ -81,53 +88,63 @@ export default function AdminPage() {
 
   if (checking) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'hsl(240, 10%, 4%)' }}>
-        <div className="w-8 h-8 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+      <div
+        className="flex min-h-screen items-center justify-center"
+        style={{ background: 'hsl(240, 10%, 4%)' }}
+      >
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500/30 border-t-purple-500" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'hsl(240, 10%, 4%)' }}>
+    <div
+      className="flex min-h-screen items-center justify-center px-4"
+      style={{ background: 'hsl(240, 10%, 4%)' }}
+    >
       <div className="w-full max-w-md">
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md">
           {/* Logo */}
-          <div className="flex flex-col items-center mb-8">
-            <div className="w-14 h-14 bg-gradient-to-br from-[#a855f7] to-[#ec4899] rounded-2xl flex items-center justify-center mb-4">
+          <div className="mb-8 flex flex-col items-center">
+            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#a855f7] to-[#ec4899]">
               <Zap className="h-7 w-7 text-white" />
             </div>
             <h1 className="text-2xl font-bold text-white">{t('title')}</h1>
-            <p className="text-gray-500 text-sm mt-1">Ekvira Lights</p>
+            <p className="mt-1 text-sm text-gray-500">Ekvira Lights</p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">{t('email')}</label>
+              <label className="mb-2 block text-sm font-semibold text-gray-300">
+                {t('email')}
+              </label>
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 focus:outline-none transition-all"
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder-gray-500 transition-all focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/50"
                 placeholder="admin@ekviralights.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">{t('password')}</label>
+              <label className="mb-2 block text-sm font-semibold text-gray-300">
+                {t('password')}
+              </label>
               <input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 focus:outline-none transition-all"
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white placeholder-gray-500 transition-all focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/50"
                 placeholder="••••••••"
               />
             </div>
 
             {error && (
-              <p className="text-red-400 text-sm text-center bg-red-500/10 border border-red-500/20 rounded-lg py-2 px-3">
+              <p className="rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-center text-sm text-red-400">
                 {error}
               </p>
             )}
@@ -135,8 +152,10 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 rounded-xl font-bold text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-              style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}
+              className="flex w-full items-center justify-center space-x-2 rounded-xl py-4 font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
+              style={{
+                background: 'linear-gradient(135deg, #a855f7, #ec4899)',
+              }}
             >
               <LogIn className="h-5 w-5" />
               <span>{loading ? 'Loading...' : t('submit')}</span>

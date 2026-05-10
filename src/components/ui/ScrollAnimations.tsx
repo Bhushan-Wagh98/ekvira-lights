@@ -3,7 +3,15 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
-export const FadeUp = ({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) => {
+export const FadeUp = ({
+  children,
+  delay = 0,
+  className = '',
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -21,7 +29,15 @@ export const FadeUp = ({ children, delay = 0, className = '' }: { children: Reac
   );
 };
 
-export const ScaleIn = ({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) => {
+export const ScaleIn = ({
+  children,
+  delay = 0,
+  className = '',
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -39,7 +55,15 @@ export const ScaleIn = ({ children, delay = 0, className = '' }: { children: Rea
   );
 };
 
-export const SlideLeft = ({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) => {
+export const SlideLeft = ({
+  children,
+  delay = 0,
+  className = '',
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -57,7 +81,15 @@ export const SlideLeft = ({ children, delay = 0, className = '' }: { children: R
   );
 };
 
-export const SlideRight = ({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) => {
+export const SlideRight = ({
+  children,
+  delay = 0,
+  className = '',
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -75,7 +107,13 @@ export const SlideRight = ({ children, delay = 0, className = '' }: { children: 
   );
 };
 
-export const StaggerContainer = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
+export const StaggerContainer = ({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -95,11 +133,21 @@ export const StaggerContainer = ({ children, className = '' }: { children: React
   );
 };
 
-export const StaggerItem = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+export const StaggerItem = ({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
   <motion.div
     variants={{
       hidden: { opacity: 0, y: 30 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: 'easeOut' },
+      },
     }}
     style={{ willChange: 'opacity, transform' }}
     className={className}

@@ -34,24 +34,34 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
     overflow-x: hidden;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply relative px-8 py-4 rounded-xl font-bold text-white overflow-hidden transition-all duration-300;
-    background: linear-gradient(135deg, hsl(280, 100%, 60%), hsl(320, 100%, 50%));
-    box-shadow: 0 0 20px hsla(280, 100%, 60%, 0.4), 0 0 60px hsla(280, 100%, 60%, 0.1);
+    @apply relative overflow-hidden rounded-xl px-8 py-4 font-bold text-white transition-all duration-300;
+    background: linear-gradient(
+      135deg,
+      hsl(280, 100%, 60%),
+      hsl(320, 100%, 50%)
+    );
+    box-shadow:
+      0 0 20px hsla(280, 100%, 60%, 0.4),
+      0 0 60px hsla(280, 100%, 60%, 0.1);
   }
   .btn-primary:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 0 30px hsla(280, 100%, 60%, 0.6), 0 0 80px hsla(280, 100%, 60%, 0.2);
+    box-shadow:
+      0 0 30px hsla(280, 100%, 60%, 0.6),
+      0 0 80px hsla(280, 100%, 60%, 0.2);
   }
 
   .btn-secondary {
-    @apply px-8 py-4 rounded-xl font-bold transition-all duration-300 border-2;
+    @apply rounded-xl border-2 px-8 py-4 font-bold transition-all duration-300;
     border-color: hsla(180, 100%, 50%, 0.5);
     color: hsl(180, 100%, 50%);
     background: hsla(180, 100%, 50%, 0.05);
@@ -67,19 +77,39 @@
   }
   .card-hover:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 60px hsla(280, 100%, 60%, 0.2), 0 0 30px hsla(180, 100%, 50%, 0.1);
+    box-shadow:
+      0 20px 60px hsla(280, 100%, 60%, 0.2),
+      0 0 30px hsla(180, 100%, 50%, 0.1);
   }
 
   .gradient-bg {
-    background: radial-gradient(ellipse at top, hsla(280, 100%, 60%, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom right, hsla(180, 100%, 50%, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom left, hsla(320, 100%, 50%, 0.1) 0%, transparent 50%),
-                hsl(240, 10%, 4%);
+    background:
+      radial-gradient(
+        ellipse at top,
+        hsla(280, 100%, 60%, 0.15) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at bottom right,
+        hsla(180, 100%, 50%, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at bottom left,
+        hsla(320, 100%, 50%, 0.1) 0%,
+        transparent 50%
+      ),
+      hsl(240, 10%, 4%);
   }
 
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(180, 100%, 60%), hsl(320, 100%, 60%));
+    background-image: linear-gradient(
+      135deg,
+      hsl(280, 100%, 70%),
+      hsl(180, 100%, 60%),
+      hsl(320, 100%, 60%)
+    );
   }
 
   .container-padding {
@@ -91,22 +121,29 @@
   }
 
   .glow-card {
-    @apply relative rounded-2xl overflow-hidden;
+    @apply relative overflow-hidden rounded-2xl;
     background: hsla(240, 10%, 10%, 0.8);
     border: 1px solid hsla(280, 100%, 60%, 0.2);
     backdrop-filter: blur(10px);
   }
   .glow-card:hover {
     border-color: hsla(280, 100%, 60%, 0.5);
-    box-shadow: 0 0 30px hsla(280, 100%, 60%, 0.15), inset 0 0 30px hsla(280, 100%, 60%, 0.05);
+    box-shadow:
+      0 0 30px hsla(280, 100%, 60%, 0.15),
+      inset 0 0 30px hsla(280, 100%, 60%, 0.05);
   }
 
   .neon-text {
-    text-shadow: 0 0 10px hsla(280, 100%, 60%, 0.8), 0 0 40px hsla(280, 100%, 60%, 0.4), 0 0 80px hsla(280, 100%, 60%, 0.2);
+    text-shadow:
+      0 0 10px hsla(280, 100%, 60%, 0.8),
+      0 0 40px hsla(280, 100%, 60%, 0.4),
+      0 0 80px hsla(280, 100%, 60%, 0.2);
   }
 
   .neon-cyan {
-    text-shadow: 0 0 10px hsla(180, 100%, 50%, 0.8), 0 0 40px hsla(180, 100%, 50%, 0.4);
+    text-shadow:
+      0 0 10px hsla(180, 100%, 50%, 0.8),
+      0 0 40px hsla(180, 100%, 50%, 0.4);
   }
 }
 
@@ -131,50 +168,102 @@
 /* === ANIMATIONS === */
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
 }
 
 @keyframes beam-rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
-  25%, 75% { opacity: 0.9; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  25%,
+  75% {
+    opacity: 0.9;
+  }
 }
 
 @keyframes slide-in-left {
-  from { transform: translateX(-100px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-right {
-  from { transform: translateX(100px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes scale-in {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes spotlight {
-  0% { transform: translateX(-100%) rotate(15deg); }
-  100% { transform: translateX(200%) rotate(15deg); }
+  0% {
+    transform: translateX(-100%) rotate(15deg);
+  }
+  100% {
+    transform: translateX(200%) rotate(15deg);
+  }
 }
 
 .animate-float {
@@ -218,7 +307,12 @@
   left: 0;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, hsla(280, 100%, 60%, 0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(280, 100%, 60%, 0.1),
+    transparent
+  );
   animation: spotlight 4s ease-in-out infinite;
 }
 

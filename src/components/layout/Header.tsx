@@ -49,49 +49,60 @@ const Header = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${visible ? 'translate-y-0' : '-translate-y-full'} ${scrolled || isMenuOpen ? 'bg-background/95 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20' : 'bg-transparent'}`}>
-      <nav className="container mx-auto container-padding py-4">
-        <div className="flex justify-between items-center">
+    <header
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${visible ? 'translate-y-0' : '-translate-y-full'} ${scrolled || isMenuOpen ? 'border-b border-white/5 bg-background/95 shadow-lg shadow-black/20 backdrop-blur-xl' : 'bg-transparent'}`}
+    >
+      <nav className="container-padding container mx-auto py-4">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-neon-purple to-neon-pink rounded-xl flex items-center justify-center shadow-[0_0_20px_hsla(280,100%,60%,0.3)] group-hover:shadow-[0_0_30px_hsla(280,100%,60%,0.5)] transition-all">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <Link
+            href={`/${locale}`}
+            className="group flex items-center space-x-3"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple to-neon-pink shadow-[0_0_20px_hsla(280,100%,60%,0.3)] transition-all group-hover:shadow-[0_0_30px_hsla(280,100%,60%,0.5)]">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
             </div>
             <div>
-              <h1 className="text-lg font-bold text-white font-jaini">एकवीरा लाइट्स</h1>
+              <h1 className="font-jaini text-lg font-bold text-white">
+                एकवीरा लाइट्स
+              </h1>
               <p className="text-xs text-neon-cyan">DJ Lights on Rent</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
+          <div className="hidden items-center space-x-8 md:flex">
+            {navigation.map(item => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-400 hover:text-neon-purple transition-colors font-medium"
+                className="font-medium text-gray-400 transition-colors hover:text-neon-purple"
               >
                 {item.name}
               </Link>
             ))}
             <button
               onClick={toggleLanguage}
-              className="flex items-center space-x-1 text-gray-400 hover:text-neon-cyan transition-colors"
+              className="flex items-center space-x-1 text-gray-400 transition-colors hover:text-neon-cyan"
             >
               <Globe className="h-4 w-4" />
-              <span className="text-sm font-medium">{locale === 'en' ? 'मराठी' : 'English'}</span>
+              <span className="text-sm font-medium">
+                {locale === 'en' ? 'मराठी' : 'English'}
+              </span>
             </button>
             <a
               href="https://www.instagram.com/reel/DYH4YEqTyta/?igsh=OHY3dmFjbnZsemgw"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-400 hover:text-neon-pink transition-colors"
+              className="flex items-center space-x-2 text-gray-400 transition-colors hover:text-neon-pink"
             >
               <Instagram className="h-4 w-4" />
             </a>
             <a
               href={`tel:${process.env.NEXT_PUBLIC_BUSINESS_PHONE}`}
-              className="flex items-center space-x-2 bg-neon-purple/10 border border-neon-purple/30 text-neon-purple px-4 py-2 rounded-xl font-semibold hover:bg-neon-purple/20 transition-all"
+              className="flex items-center space-x-2 rounded-xl border border-neon-purple/30 bg-neon-purple/10 px-4 py-2 font-semibold text-neon-purple transition-all hover:bg-neon-purple/20"
             >
               <Phone className="h-4 w-4" />
               <span>Call</span>
@@ -101,7 +112,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 hover:border-neon-purple/50 transition-colors"
+            className="rounded-xl border border-white/10 bg-white/5 p-2 transition-colors hover:border-neon-purple/50 md:hidden"
           >
             {isMenuOpen ? (
               <X className="h-6 w-6 text-white" />
@@ -112,14 +123,16 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="pb-4 border-t border-white/10">
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
+        >
+          <div className="border-t border-white/10 pb-4">
             <div className="flex flex-col space-y-4 pt-4">
-              {navigation.map((item) => (
+              {navigation.map(item => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-300 hover:text-neon-purple transition-colors font-medium"
+                  className="font-medium text-gray-300 transition-colors hover:text-neon-purple"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -127,7 +140,7 @@ const Header = () => {
               ))}
               <button
                 onClick={toggleLanguage}
-                className="flex items-center space-x-1 text-gray-400 hover:text-neon-cyan transition-colors w-fit"
+                className="flex w-fit items-center space-x-1 text-gray-400 transition-colors hover:text-neon-cyan"
               >
                 <Globe className="h-4 w-4" />
                 <span>{locale === 'en' ? 'मराठी' : 'English'}</span>

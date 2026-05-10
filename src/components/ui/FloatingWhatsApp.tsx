@@ -2,12 +2,18 @@
 
 import WhatsAppIcon from './WhatsAppIcon';
 
+/**
+ * Floating WhatsApp Button
+ * Always visible on bottom-right corner for instant booking.
+ * Bounces 3 times on load to grab attention, then stays static.
+ */
 const FloatingWhatsApp = () => {
   const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE?.replace(/[^0-9]/g, '') || '';
+  const message = 'नमस्कार, मला माझ्या इव्हेंटसाठी DJ लाइट्स भाड्याने हवे आहेत.';
 
   return (
     <a
-      href={`https://wa.me/${phone}?text=नमस्कार, मला माझ्या इव्हेंटसाठी DJ लाइट्स भाड्याने हवे आहेत.`}
+      href={`https://wa.me/${phone}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.5)] hover:shadow-[0_4px_30px_rgba(37,211,102,0.7)] transition-all hover:scale-110 animate-bounce"
