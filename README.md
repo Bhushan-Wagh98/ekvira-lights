@@ -9,14 +9,16 @@ A modern, mobile-first website for Ekvira Lights — a DJ lighting rental busine
 ## ⚡ Features
 
 - **Dark Neon Theme** — High-energy DJ-inspired design with glowing effects and animations
-- **Mobile-First** — Optimized for mobile users
+- **Mobile-First** — Optimized for mobile users, no horizontal scroll issues
 - **Bilingual** — English & Marathi (next-intl)
 - **Scroll Animations** — Framer Motion powered reveal effects
 - **Preloader** — Smooth loading experience on first visit
 - **Contact Form** — Saves inquiries directly to database
-- **WhatsApp Integration** — One-tap booking via WhatsApp (Marathi message)
+- **WhatsApp Integration** — One-tap booking via WhatsApp with proper WhatsApp logo
 - **Dynamic Gallery** — Admin-managed photo gallery from database
-- **Admin Panel** — Secure dashboard to manage everything
+- **Customer Reviews** — Admin-managed reviews section with photos and ratings
+- **Admin Panel** — Secure dashboard with route-based navigation
+- **SEO Optimized** — Sitemap, robots.txt, JSON-LD structured data for Google indexing
 
 ## 🛠 Tech Stack
 
@@ -34,11 +36,25 @@ A modern, mobile-first website for Ekvira Lights — a DJ lighting rental busine
 
 ```
 src/
-├── app/[locale]/          # Pages (home, admin)
+├── app/
+│   ├── [locale]/
+│   │   ├── admin/
+│   │   │   ├── page.tsx              # Login page
+│   │   │   └── dashboard/
+│   │   │       ├── layout.tsx        # Shared header, stats, tabs
+│   │   │       ├── page.tsx          # Redirects to /inquiries
+│   │   │       ├── inquiries/page.tsx
+│   │   │       ├── gallery/page.tsx
+│   │   │       ├── reviews/page.tsx
+│   │   │       └── settings/page.tsx
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── robots.ts
+│   └── sitemap.ts
 ├── components/
 │   ├── layout/            # Header, Footer
-│   ├── sections/          # Hero, Services, Gallery, Contact
-│   └── ui/                # Preloader, ScrollAnimations
+│   ├── sections/          # Hero, Services, Gallery, Reviews, Contact
+│   └── ui/                # Preloader, ScrollAnimations, WhatsAppIcon
 ├── lib/                   # Supabase client
 ├── types/                 # TypeScript types
 ├── styles/                # Global CSS (neon theme)
@@ -77,13 +93,19 @@ NEXT_PUBLIC_BUSINESS_ADDRESS=Shemba, Tq. Nandura, Dist. Buldhana, Maharashtra
 
 ## 👨‍💼 Admin Panel
 
-- URL: `/en/admin`
+- Login: `/en/admin`
+- Routes:
+  - `/en/admin/dashboard/inquiries` — View & manage customer inquiries
+  - `/en/admin/dashboard/gallery` — Add, edit, delete gallery photos
+  - `/en/admin/dashboard/reviews` — Add, edit, delete customer reviews
+  - `/en/admin/dashboard/settings` — Update business info, social links
 - Features:
-  - View & manage customer inquiries
   - Update inquiry status (New → In Progress → Completed)
   - Reply via WhatsApp directly
-  - Add/delete gallery photos
-  - Update business info (phone, email, address, social links)
+  - Inline edit for gallery & reviews
+  - Custom delete confirmation modal (no browser alerts)
+  - Loading spinners while fetching data
+  - 2-column settings layout
 
 ## 🗄 Database (Supabase)
 
@@ -91,6 +113,7 @@ Uses custom `ekvira` schema with tables:
 - `business_info` — Phone, email, address, social links
 - `services` — Sharpy, Blinder, Bottom, Laser
 - `gallery` — Event photos with categories
+- `reviews` — Customer reviews with ratings and photos
 - `inquiries` — Customer booking requests
 - `users` — Admin authentication
 
@@ -102,6 +125,13 @@ Uses custom `ekvira` schema with tables:
 | Blinder | High-intensity flash/audience blinder lights |
 | Bottom | LED uplighting and floor wash |
 | Laser | Multi-color laser effects with patterns |
+
+## 🔍 SEO
+
+- `robots.ts` — Allows crawling, blocks admin/api routes
+- `sitemap.ts` — Auto-generated sitemap for all locales
+- JSON-LD structured data — LocalBusiness schema for Google rich results
+- Submit sitemap at [Google Search Console](https://search.google.com/search-console)
 
 ## 🌐 Deployment (Vercel)
 
