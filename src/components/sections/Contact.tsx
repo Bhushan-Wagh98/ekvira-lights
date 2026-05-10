@@ -401,6 +401,17 @@ const Contact = () => {
                 </div>
               </div>
 
+              {/* Map */}
+              <div className="overflow-hidden rounded-2xl border border-white/10">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3731.9890097774464!2d76.27156767326355!3d20.710670888187117!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjDCsDQyJzM3LjMiTiA3NsKwMTYnMjYuNiJF!5e0!3m2!1sen!2sus!4v1778417419202!5m2!1sen!2sus"
+                  className="w-full h-64 border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
               {/* Quick Actions */}
               <div className="glow-card p-6">
                 <h4 className="mb-4 text-lg font-bold text-white">

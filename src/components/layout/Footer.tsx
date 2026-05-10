@@ -214,14 +214,40 @@ const Footer = () => {
 
       <div className="border-t border-white/5">
         <div className="container-padding container mx-auto flex items-center justify-between py-6">
-          <p className="text-sm text-gray-600">
-            © {new Date().getFullYear()} Ekvira Lights. All rights reserved.
-          </p>
+          <div className="text-sm text-gray-600">
+            <p>Built by{' '}
+              <a
+                href="https://github.com/Bhushan-Wagh98"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-neon-cyan transition-colors"
+              >
+                Bhushan Wagh
+              </a>
+              {' '}— Want something like this?
+            </p>
+            <div className="flex items-center gap-2 mt-1">
+              <a
+                href="tel:+917083732015"
+                className="inline-flex items-center text-neon-purple hover:text-neon-cyan transition-colors"
+              >
+                <Phone className="h-4 w-4" />
+              </a>
+              <a
+                href="https://wa.me/917083732015"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
           <a
             href={`/${locale}/admin`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-gray-700 transition-colors hover:text-gray-500"
+            className="text-xs text-gray-700 transition-colors hover:text-gray-500 mr-16"
           >
             Admin
           </a>
