@@ -74,7 +74,7 @@ const InstagramPosts = () => {
         <FadeUp delay={0.2}>
           <div className="text-center mt-10">
             <a
-              href="https://instagram.com/ekvira_lights_07"
+              href="https://www.instagram.com/reel/DYH4YEqTyta/?igsh=OHY3dmFjbnZsemgw"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary inline-flex items-center space-x-2 text-base"

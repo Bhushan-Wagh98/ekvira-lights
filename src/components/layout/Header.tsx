@@ -59,7 +59,7 @@ const Header = () => {
               <span className="text-sm font-medium">{locale === 'en' ? 'मराठी' : 'English'}</span>
             </button>
             <a
-              href="https://instagram.com/ekvira_lights_07"
+              href="https://www.instagram.com/reel/DYH4YEqTyta/?igsh=OHY3dmFjbnZsemgw"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 text-gray-400 hover:text-neon-pink transition-colors"
