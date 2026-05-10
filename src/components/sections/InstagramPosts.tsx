@@ -7,18 +7,19 @@ import { cn } from '@/utils';
 import { FadeUp } from '@/components/ui/ScrollAnimations';
 
 const InstagramEmbed = ({ url }: { url: string }) => {
-  // Convert any instagram URL to embed URL
-  const embedUrl = url.replace(/\?.*$/, '') + 'embed';
+  const embedUrl = url.replace(/\?.*$/, '') + 'embed/captioned';
 
   return (
-    <div className="rounded-xl overflow-hidden border border-white/10 hover:border-neon-pink/50 transition-all">
-      <iframe
-        src={embedUrl}
-        className="w-full aspect-[4/5] border-0"
-        allowFullScreen
-        loading="lazy"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-      />
+    <div className="rounded-xl overflow-hidden border border-white/10 hover:border-neon-pink/50 transition-all bg-[hsl(240,10%,8%)] relative">
+      <div className="instagram-embed-wrapper">
+        <iframe
+          src={embedUrl}
+          className="w-full aspect-[4/5] border-0"
+          allowFullScreen
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+        />
+      </div>
     </div>
   );
 };

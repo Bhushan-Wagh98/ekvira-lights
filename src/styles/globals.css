@@ -271,6 +271,16 @@
   --tw-ring-color: hsl(280, 100%, 60%);
 }
 
+/* Instagram embed dark mode */
+.instagram-embed-wrapper {
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+.instagram-embed-wrapper iframe {
+  filter: invert(1) hue-rotate(180deg);
+  -webkit-filter: invert(1) hue-rotate(180deg);
+}
+
 /* === NEON SCROLLBAR === */
 ::-webkit-scrollbar {
   width: 6px;
