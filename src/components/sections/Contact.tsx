@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon';
 import { cn } from '@/utils';
 import { FadeUp, SlideLeft, SlideRight } from '@/components/ui/ScrollAnimations';
 
@@ -258,9 +259,10 @@ const Contact = () => {
                     href={`https://wa.me/${(biz?.social_links?.whatsapp || biz?.phone?.split(',')[0] || process.env.NEXT_PUBLIC_BUSINESS_PHONE || '').replace(/[^0-9]/g, '')}?text=नमस्कार, मला माझ्या इव्हेंटसाठी DJ लाइट्स भाड्याने हवे आहेत.`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 text-green-400 px-4 py-3.5 rounded-xl font-semibold text-center transition-all hover:shadow-[0_0_20px_hsla(140,100%,40%,0.2)]"
+                    className="block w-full bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 text-green-400 px-4 py-3.5 rounded-xl font-semibold text-center transition-all hover:shadow-[0_0_20px_hsla(140,100%,40%,0.2)] inline-flex items-center justify-center space-x-2"
                   >
-                    WhatsApp Us
+                    <WhatsAppIcon className="h-5 w-5" />
+                    <span>WhatsApp Us</span>
                   </a>
                   <a
                     href={`tel:${(biz?.phone?.split(',')[0] || process.env.NEXT_PUBLIC_BUSINESS_PHONE || '').trim()}`}

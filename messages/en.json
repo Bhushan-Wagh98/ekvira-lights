@@ -99,5 +99,9 @@
       "corporate": "Corporate",
       "stage": "Stage Shows"
     }
+  },
+  "reviews": {
+    "title": "Happy Customers",
+    "subtitle": "What our clients say about our lighting setups"
   }
 }

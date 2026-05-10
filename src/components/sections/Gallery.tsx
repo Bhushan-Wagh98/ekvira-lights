@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import { cn } from '@/utils';
 import { FadeUp } from '@/components/ui/ScrollAnimations';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon';
 
 const Gallery = () => {
   const t = useTranslations('gallery');
@@ -112,8 +112,8 @@ const Gallery = () => {
               rel="noopener noreferrer"
               className="btn-primary inline-flex items-center space-x-2 group text-lg"
             >
+              <WhatsAppIcon className="h-5 w-5" />
               <span>Book for Your Event</span>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </FadeUp>

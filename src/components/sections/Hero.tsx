@@ -3,7 +3,8 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Zap, Star, Users } from 'lucide-react';
+import { Zap, Star, Users } from 'lucide-react';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon';
 import { cn } from '@/utils';
 
 const Hero = () => {
@@ -96,8 +97,8 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center justify-center space-x-2 group text-base sm:text-lg"
               >
+                <WhatsAppIcon className="h-5 w-5" />
                 <span>{t('cta')}</span>
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <Link
                 href={`/${locale}#services`}

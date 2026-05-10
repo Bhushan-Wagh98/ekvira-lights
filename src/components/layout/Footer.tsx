@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle, Youtube } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon';
 import { cn } from '@/utils';
 
 const Footer = () => {
@@ -79,7 +80,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-white/5 border border-white/10 hover:border-green-500/50 hover:bg-green-500/10 rounded-lg flex items-center justify-center transition-all"
               >
-                <MessageCircle className="h-4 w-4 text-gray-400" />
+                <WhatsAppIcon className="h-4 w-4 text-gray-400" />
               </a>
             </div>
           </div>
@@ -150,9 +151,9 @@ const Footer = () => {
           <p className="text-gray-600 text-sm">
             © {new Date().getFullYear()} Ekvira Lights. All rights reserved.
           </p>
-          <Link href={`/${locale}/admin`} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">
+          <a href={`/${locale}/admin`} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-500 text-xs transition-colors">
             Admin
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

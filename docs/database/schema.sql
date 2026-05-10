@@ -69,12 +69,25 @@ CREATE TABLE ekvira.inquiries (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Create reviews table
+CREATE TABLE ekvira.reviews (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  customer_name TEXT NOT NULL,
+  event_type TEXT NOT NULL,
+  rating INTEGER DEFAULT 5 CHECK (rating >= 1 AND rating <= 5),
+  review_text TEXT NOT NULL,
+  photo_url TEXT,
+  is_featured BOOLEAN DEFAULT true,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Create indexes
 CREATE INDEX idx_ekvira_gallery_category ON ekvira.gallery(category);
 CREATE INDEX idx_ekvira_gallery_featured ON ekvira.gallery(is_featured);
 CREATE INDEX idx_ekvira_inquiries_status ON ekvira.inquiries(status);
 CREATE INDEX idx_ekvira_inquiries_created_at ON ekvira.inquiries(created_at DESC);
 CREATE INDEX idx_ekvira_services_active ON ekvira.services(is_active);
+CREATE INDEX idx_ekvira_reviews_featured ON ekvira.reviews(is_featured);
 
 -- Create updated_at trigger function
 CREATE OR REPLACE FUNCTION ekvira.update_updated_at_column()

@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Zap, Sun, ArrowDown, Sparkles } from 'lucide-react';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon';
 import { cn } from '@/utils';
 import { FadeUp, StaggerContainer, StaggerItem } from '@/components/ui/ScrollAnimations';
 
@@ -94,6 +95,7 @@ const Services = () => {
               rel="noopener noreferrer"
               className="btn-primary inline-flex items-center space-x-2 text-lg"
             >
+              <WhatsAppIcon className="h-5 w-5" />
               <span>Book Lights on WhatsApp</span>
             </a>
           </div>

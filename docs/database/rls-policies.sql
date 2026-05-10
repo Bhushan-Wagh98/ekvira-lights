@@ -7,6 +7,7 @@ ALTER TABLE ekvira.business_info ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ekvira.services ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ekvira.gallery ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ekvira.inquiries ENABLE ROW LEVEL SECURITY;
+ALTER TABLE ekvira.reviews ENABLE ROW LEVEL SECURITY;
 
 -- Users table policies
 CREATE POLICY "Users can view their own profile" ON ekvira.users
@@ -105,6 +106,34 @@ CREATE POLICY "Only admins can view inquiries" ON ekvira.inquiries
 
 CREATE POLICY "Only admins can update inquiries" ON ekvira.inquiries
   FOR UPDATE USING (
+    EXISTS (
+      SELECT 1 FROM ekvira.users 
+      WHERE users.id = auth.uid() AND users.role = 'admin'
+    )
+  );
+
+CREATE POLICY "Only admins can delete inquiries" ON ekvira.inquiries
+  FOR DELETE USING (
+    EXISTS (
+      SELECT 1 FROM ekvira.users 
+      WHERE users.id = auth.uid() AND users.role = 'admin'
+    )
+  );
+
+-- Reviews policies (public read, admin write)
+CREATE POLICY "Anyone can view featured reviews" ON ekvira.reviews
+  FOR SELECT USING (true);
+
+CREATE POLICY "Only admins can insert reviews" ON ekvira.reviews
+  FOR INSERT WITH CHECK (
+    EXISTS (
+      SELECT 1 FROM ekvira.users 
+      WHERE users.id = auth.uid() AND users.role = 'admin'
+    )
+  );
+
+CREATE POLICY "Only admins can delete reviews" ON ekvira.reviews
+  FOR DELETE USING (
     EXISTS (
       SELECT 1 FROM ekvira.users 
       WHERE users.id = auth.uid() AND users.role = 'admin'

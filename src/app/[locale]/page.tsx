@@ -3,6 +3,7 @@ import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
 import Services from '@/components/sections/Services';
 import Gallery from '@/components/sections/Gallery';
+import Reviews from '@/components/sections/Reviews';
 import Contact from '@/components/sections/Contact';
 import Footer from '@/components/layout/Footer';
 
@@ -21,12 +22,13 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Header />
       <main>
         <Hero />
         <Services />
         <Gallery />
+        <Reviews />
         <Contact />
       </main>
       <Footer />
