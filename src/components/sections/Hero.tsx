@@ -12,7 +12,7 @@ const Hero = () => {
   const locale = useLocale();
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden gradient-bg particles-bg">
+    <section className="relative min-h-screen flex items-center overflow-hidden gradient-bg particles-bg pt-[72px]">
       {/* Background beams - CSS only, no JS animation */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[2px] h-full bg-gradient-to-b from-transparent via-neon-purple/20 to-transparent animate-pulse-glow" />

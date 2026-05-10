@@ -45,7 +45,7 @@ const InstagramPosts = () => {
   if (posts.length === 0) return null;
 
   return (
-    <section className="section-padding relative" style={{ background: 'hsl(240, 10%, 4%)' }}>
+    <section id="instagram" className="section-padding relative" style={{ background: 'hsl(240, 10%, 4%)' }}>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-pink/50 to-transparent" />
 
       <div className="container mx-auto container-padding relative z-10">

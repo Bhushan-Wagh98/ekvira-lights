@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -8,14 +8,37 @@ import { Menu, X, Phone, Globe, Instagram } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const t = useTranslations();
   const locale = useLocale();
   const pathname = usePathname();
+
+  useEffect(() => {
+    let lastScrollY = 0;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < 50) {
+        setVisible(true);
+        setScrolled(false);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 200) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+        setScrolled(true);
+      }
+      lastScrollY = currentScrollY;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navigation = [
     { name: t('navigation.home'), href: `/${locale}` },
     { name: t('navigation.services'), href: `/${locale}#services` },
     { name: t('navigation.gallery'), href: `/${locale}#gallery` },
+    { name: 'Reviews', href: `/${locale}#reviews` },
+    { name: 'Instagram', href: `/${locale}#instagram` },
     { name: t('navigation.contact'), href: `/${locale}#contact` },
   ];
 
@@ -26,7 +49,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-white/5">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${visible ? 'translate-y-0' : '-translate-y-full'} ${scrolled ? 'bg-background/95 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20' : 'bg-transparent'}`}>
       <nav className="container mx-auto container-padding py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
