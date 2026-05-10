@@ -43,11 +43,9 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="space-y-4 md:space-y-6"
             >
-              <h1 className={cn(
-                "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight",
-                locale === 'mr' ? 'font-marathi' : ''
-              )}>
-                <span className="text-gradient">{t('title')}</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight">
+                <span className="text-gradient font-jaini">एकवीरा लाइट्स</span>
+                <span className="text-gradient text-2xl sm:text-3xl md:text-4xl block mt-2"> — DJ Lights on Rent</span>
               </h1>
               <p className={cn(
                 "text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl",

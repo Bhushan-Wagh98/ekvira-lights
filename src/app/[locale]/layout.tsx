@@ -1,11 +1,28 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import { cn } from '@/utils';
 import Preloader from '@/components/ui/Preloader';
 import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
+
+const hind = localFont({
+  src: [
+    { path: '../../fonts/Hind-Light.ttf', weight: '300' },
+    { path: '../../fonts/Hind-Regular.ttf', weight: '400' },
+    { path: '../../fonts/Hind-Medium.ttf', weight: '500' },
+    { path: '../../fonts/Hind-SemiBold.ttf', weight: '600' },
+    { path: '../../fonts/Hind-Bold.ttf', weight: '700' },
+  ],
+  variable: '--font-hind',
+});
+
+const jaini = localFont({
+  src: '../../fonts/Jaini-Regular.ttf',
+  variable: '--font-jaini',
+});
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -45,15 +62,13 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={cn(inter.className, locale === 'mr' && 'font-marathi')}>
+    <html lang={locale} className={cn(inter.className, hind.variable, jaini.variable, 'font-hind')}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0a0a0f" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/logo.svg" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -244,9 +243,20 @@
 }
 
 /* Marathi font */
-.font-marathi {
-  font-family: 'Noto Sans Devanagari', system-ui, sans-serif;
-  font-feature-settings: "kern" 1, "liga" 1;
+.font-marathi,
+.font-marathi * {
+  font-family: var(--font-hind), system-ui, sans-serif;
+}
+
+/* Hind font global */
+.font-hind,
+.font-hind * {
+  font-family: var(--font-hind), system-ui, sans-serif;
+}
+
+/* Jaini font for logo */
+.font-jaini {
+  font-family: var(--font-jaini), serif;
 }
 
 /* Mobile */

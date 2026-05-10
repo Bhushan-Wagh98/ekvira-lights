@@ -253,7 +253,7 @@ const Contact = () => {
 
               {/* Quick Actions */}
               <div className="glow-card p-6">
-                <h4 className="font-bold text-white mb-4 text-lg">Quick Booking</h4>
+                <h4 className="font-bold text-white mb-4 text-lg">{locale === 'mr' ? 'त्वरित बुकिंग' : 'Quick Booking'}</h4>
                 <div className="space-y-3">
                   <a
                     href={`https://wa.me/${(biz?.social_links?.whatsapp || biz?.phone?.split(',')[0] || process.env.NEXT_PUBLIC_BUSINESS_PHONE || '').replace(/[^0-9]/g, '')}?text=नमस्कार, मला माझ्या इव्हेंटसाठी DJ लाइट्स भाड्याने हवे आहेत.`}
@@ -262,13 +262,13 @@ const Contact = () => {
                     className="block w-full bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 text-green-400 px-4 py-3.5 rounded-xl font-semibold text-center transition-all hover:shadow-[0_0_20px_hsla(140,100%,40%,0.2)] inline-flex items-center justify-center space-x-2"
                   >
                     <WhatsAppIcon className="h-5 w-5" />
-                    <span>WhatsApp Us</span>
+                    <span>{locale === 'mr' ? 'WhatsApp वर संपर्क करा' : 'WhatsApp Us'}</span>
                   </a>
                   <a
                     href={`tel:${(biz?.phone?.split(',')[0] || process.env.NEXT_PUBLIC_BUSINESS_PHONE || '').trim()}`}
                     className="block w-full bg-neon-purple/20 hover:bg-neon-purple/30 border border-neon-purple/50 text-neon-purple px-4 py-3.5 rounded-xl font-semibold text-center transition-all hover:shadow-[0_0_20px_hsla(280,100%,60%,0.2)]"
                   >
-                    Call Now
+                    {locale === 'mr' ? 'आत्ता कॉल करा' : 'Call Now'}
                   </a>
                 </div>
               </div>

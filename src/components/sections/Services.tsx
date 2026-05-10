@@ -96,7 +96,7 @@ const Services = () => {
               className="btn-primary inline-flex items-center space-x-2 text-lg"
             >
               <WhatsAppIcon className="h-5 w-5" />
-              <span>Book Lights on WhatsApp</span>
+              <span>{locale === 'mr' ? 'WhatsApp वर लाइट्स बुक करा' : 'Book Lights on WhatsApp'}</span>
             </a>
           </div>
         </FadeUp>

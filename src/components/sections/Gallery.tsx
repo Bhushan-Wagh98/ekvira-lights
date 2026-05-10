@@ -114,7 +114,7 @@ const Gallery = () => {
               className="btn-primary inline-flex items-center space-x-2 group text-lg"
             >
               <WhatsAppIcon className="h-5 w-5" />
-              <span>Book for Your Event</span>
+              <span>{locale === 'mr' ? 'तुमच्या इव्हेंटसाठी बुक करा' : 'Book for Your Event'}</span>
             </a>
           </div>
         </FadeUp>

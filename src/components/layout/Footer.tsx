@@ -28,12 +28,19 @@ const Footer = () => {
 
   const quickLinks = [
     { name: t('navigation.home'), href: `/${locale}` },
-    { name: t('navigation.services'), href: `/${locale}#services` },
     { name: t('navigation.gallery'), href: `/${locale}#gallery` },
+    { name: t('navigation.services'), href: `/${locale}#services` },
+    { name: t('common.reviews'), href: `/${locale}#reviews` },
+    { name: 'Instagram', href: `/${locale}#instagram` },
     { name: t('navigation.contact'), href: `/${locale}#contact` },
   ];
 
-  const lights = ['Sharpy Lights', 'Blinder Lights', 'Bottom Lights', 'Laser Lights'];
+  const lights = [
+    t('services.sharpy.title'),
+    t('services.blinder.title'),
+    t('services.bottom.title'),
+    t('services.laser.title'),
+  ];
 
   return (
     <footer className="relative" style={{ background: 'hsl(240, 10%, 3%)' }}>
@@ -48,7 +55,7 @@ const Footer = () => {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">Ekvira Lights</h3>
+                <h3 className="text-lg font-bold text-white font-jaini">एकवीरा लाइट्स</h3>
                 <p className="text-xs text-neon-cyan">DJ Lights on Rent</p>
               </div>
             </div>
@@ -56,7 +63,7 @@ const Footer = () => {
               "text-gray-500 leading-relaxed text-sm",
               locale === 'mr' ? 'font-marathi' : ''
             )}>
-              Sharpy, Blinder, Bottom & Laser lights on rent for weddings, parties, and all events.
+              {locale === 'mr' ? 'लग्न, पार्टी आणि सर्व प्रसंगांसाठी शार्पी, ब्लाइंडर, बॉटम आणि लेझर लाइट्स भाड्याने उपलब्ध.' : 'Sharpy, Blinder, Bottom & Laser lights on rent for weddings, parties, and all events.'}
             </p>
             <div className="flex space-x-3">
               {biz?.social_links?.facebook && (
@@ -87,7 +94,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">Quick Links</h4>
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">{locale === 'mr' ? 'लिंक्स' : 'Quick Links'}</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -101,7 +108,7 @@ const Footer = () => {
 
           {/* Lights */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">Our Lights</h4>
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">{t('navigation.services')}</h4>
             <ul className="space-y-3">
               {lights.map((light) => (
                 <li key={light}>
@@ -113,7 +120,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">Contact</h4>
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6">{t('navigation.contact')}</h4>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <Phone className="h-4 w-4 text-neon-purple flex-shrink-0 mt-0.5" />

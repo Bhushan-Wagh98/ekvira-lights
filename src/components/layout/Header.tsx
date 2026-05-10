@@ -37,7 +37,7 @@ const Header = () => {
     { name: t('navigation.home'), href: `/${locale}` },
     { name: t('navigation.gallery'), href: `/${locale}#gallery` },
     { name: t('navigation.services'), href: `/${locale}#services` },
-    { name: 'Reviews', href: `/${locale}#reviews` },
+    { name: t('common.reviews'), href: `/${locale}#reviews` },
     { name: 'Instagram', href: `/${locale}#instagram` },
     { name: t('navigation.contact'), href: `/${locale}#contact` },
   ];
@@ -58,7 +58,7 @@ const Header = () => {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
             <div>
-              <h1 className="text-lg font-bold text-white">Ekvira Lights</h1>
+              <h1 className="text-lg font-bold text-white font-jaini">एकवीरा लाइट्स</h1>
               <p className="text-xs text-neon-cyan">DJ Lights on Rent</p>
             </div>
           </Link>
