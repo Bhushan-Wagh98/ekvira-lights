@@ -87,6 +87,8 @@ CREATE TABLE ekvira.instagram_posts (
   post_url TEXT NOT NULL,
   image_url TEXT NOT NULL,
   caption TEXT,
+  media_type TEXT DEFAULT 'image' CHECK (media_type IN ('image', 'video')),
+  thumbnail_url TEXT,
   is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

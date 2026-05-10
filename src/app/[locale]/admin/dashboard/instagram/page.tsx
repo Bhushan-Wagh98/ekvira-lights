@@ -8,7 +8,7 @@ export default function InstagramPage() {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ post_url: '', image_url: '', caption: '' });
+  const [form, setForm] = useState({ post_url: '', image_url: '', caption: '', media_type: 'image' });
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function InstagramPage() {
     if (!error) {
       const { data } = await supabase.from('instagram_posts').select('*').order('created_at', { ascending: false });
       if (data) setPosts(data);
-      setForm({ post_url: '', image_url: '', caption: '' });
+      setForm({ post_url: '', image_url: '', caption: '', media_type: 'image' });
       setShowForm(false);
     }
   };
@@ -51,8 +51,14 @@ export default function InstagramPage() {
 
         {showForm && (
           <form onSubmit={addPost} className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-4">
-            <input type="text" placeholder="Instagram Post URL (e.g. https://instagram.com/p/...)" value={form.post_url} onChange={(e) => setForm(p => ({ ...p, post_url: e.target.value }))} required className={inputClass} />
-            <input type="text" placeholder="Image/Thumbnail URL" value={form.image_url} onChange={(e) => setForm(p => ({ ...p, image_url: e.target.value }))} required className={inputClass} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <select value={form.media_type} onChange={(e) => setForm(p => ({ ...p, media_type: e.target.value }))} className={inputClass}>
+                <option value="image" className="bg-gray-900">Photo</option>
+                <option value="video" className="bg-gray-900">Video</option>
+              </select>
+              <input type="text" placeholder="Instagram Post URL" value={form.post_url} onChange={(e) => setForm(p => ({ ...p, post_url: e.target.value }))} required className={inputClass} />
+            </div>
+            <input type="text" placeholder={form.media_type === 'video' ? 'Video URL (.mp4, .webm)' : 'Image URL'} value={form.image_url} onChange={(e) => setForm(p => ({ ...p, image_url: e.target.value }))} required className={inputClass} />
             <input type="text" placeholder="Caption (optional)" value={form.caption} onChange={(e) => setForm(p => ({ ...p, caption: e.target.value }))} className={inputClass} />
             <button type="submit" className="px-6 py-3 rounded-xl font-semibold text-white text-sm" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>Add Post</button>
           </form>
