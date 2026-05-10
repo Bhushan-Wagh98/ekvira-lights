@@ -103,5 +103,10 @@
   "reviews": {
     "title": "Happy Customers",
     "subtitle": "What our clients say about our lighting setups"
+  },
+  "instagram": {
+    "title": "Follow Us on Instagram",
+    "subtitle": "See our latest setups and behind-the-scenes",
+    "follow": "Follow @ekviralights"
   }
 }

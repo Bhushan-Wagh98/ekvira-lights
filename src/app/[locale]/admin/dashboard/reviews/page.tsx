@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Trash2, Pencil } from 'lucide-react';
+import { Trash2, Pencil, Eye, EyeOff } from 'lucide-react';
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState<any[]>([]);
@@ -37,6 +37,11 @@ export default function ReviewsPage() {
     await (supabase.from('reviews') as any).update(payload).eq('id', id);
     setReviews(prev => prev.map(r => r.id === id ? { ...r, ...payload } : r));
     setEditing(null);
+  };
+
+  const togglePublish = async (id: string, current: boolean) => {
+    await (supabase.from('reviews') as any).update({ is_featured: !current }).eq('id', id);
+    setReviews(prev => prev.map(r => r.id === id ? { ...r, is_featured: !current } : r));
   };
 
   const deleteReview = async (id: string) => {
@@ -106,11 +111,14 @@ export default function ReviewsPage() {
                     <div className="flex justify-between items-start">
                       <div className="space-y-1">
                         <h4 className="text-white font-semibold">{rev.customer_name}</h4>
-                        <p className="text-gray-500 text-xs">{rev.event_type}</p>
+                        <p className="text-gray-500 text-xs">{rev.event_type} {!rev.is_featured && <span className="text-yellow-500">• Draft</span>}</p>
                         <div className="text-yellow-400 text-sm">{'⭐'.repeat(rev.rating)}</div>
                         <p className="text-gray-400 text-sm mt-2">{rev.review_text}</p>
                       </div>
                       <div className="flex gap-1">
+                        <button onClick={() => togglePublish(rev.id, rev.is_featured)} className={`p-1.5 border rounded-lg transition-all ${rev.is_featured ? 'bg-green-500/10 border-green-500/30 hover:bg-green-500/20' : 'bg-gray-500/10 border-gray-500/30 hover:bg-gray-500/20'}`} title={rev.is_featured ? 'Unpublish' : 'Publish'}>
+                          {rev.is_featured ? <Eye className="h-3.5 w-3.5 text-green-400" /> : <EyeOff className="h-3.5 w-3.5 text-gray-400" />}
+                        </button>
                         <button onClick={() => { setEditing(rev.id); setEditForm({ customer_name: rev.customer_name, event_type: rev.event_type, rating: rev.rating, review_text: rev.review_text, photo_url: rev.photo_url || '' }); }} className="p-1.5 bg-purple-500/10 border border-purple-500/30 rounded-lg hover:bg-purple-500/20">
                           <Pencil className="h-3.5 w-3.5 text-purple-400" />
                         </button>

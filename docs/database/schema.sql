@@ -81,6 +81,16 @@ CREATE TABLE ekvira.reviews (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Create instagram_posts table
+CREATE TABLE ekvira.instagram_posts (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  post_url TEXT NOT NULL,
+  image_url TEXT NOT NULL,
+  caption TEXT,
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Create indexes
 CREATE INDEX idx_ekvira_gallery_category ON ekvira.gallery(category);
 CREATE INDEX idx_ekvira_gallery_featured ON ekvira.gallery(is_featured);

@@ -44,6 +44,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { key: 'inquiries', label: 'Inquiries', href: `/${locale}/admin/dashboard/inquiries` },
     { key: 'gallery', label: 'Gallery', href: `/${locale}/admin/dashboard/gallery` },
     { key: 'reviews', label: 'Reviews', href: `/${locale}/admin/dashboard/reviews` },
+    { key: 'instagram', label: 'Instagram', href: `/${locale}/admin/dashboard/instagram` },
     { key: 'settings', label: 'Settings', href: `/${locale}/admin/dashboard/settings` },
   ];
 
@@ -58,7 +59,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="min-h-screen" style={{ background: 'hsl(240, 10%, 4%)' }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: 'hsl(240, 10%, 4%)' }}>
       <header className="border-b border-white/5 bg-white/5 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
           <h1 className="text-lg sm:text-xl font-bold text-white">Admin Dashboard</h1>
@@ -111,12 +112,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
 
         {/* Tabs as Links */}
-        <div className="flex space-x-4 mb-6">
+        <div className="flex space-x-4 mb-6 overflow-x-auto scrollbar-hide pb-2">
           {tabs.map((t) => (
             <Link
               key={t.key}
               href={t.href}
-              className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${activeTab === t.key ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' : 'text-gray-400 hover:text-white'}`}
+              className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all whitespace-nowrap ${activeTab === t.key ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' : 'text-gray-400 hover:text-white'}`}
             >
               {t.label}
             </Link>

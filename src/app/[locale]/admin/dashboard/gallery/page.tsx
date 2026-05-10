@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Image, Trash2, Pencil } from 'lucide-react';
+import { Image, Trash2, Pencil, Eye, EyeOff } from 'lucide-react';
 
 export default function GalleryPage() {
   const [gallery, setGallery] = useState<any[]>([]);
@@ -35,6 +35,11 @@ export default function GalleryPage() {
     await (supabase.from('gallery') as any).update(editForm).eq('id', id);
     setGallery(prev => prev.map(g => g.id === id ? { ...g, ...editForm } : g));
     setEditing(null);
+  };
+
+  const togglePublish = async (id: string, current: boolean) => {
+    await (supabase.from('gallery') as any).update({ is_featured: !current }).eq('id', id);
+    setGallery(prev => prev.map(g => g.id === id ? { ...g, is_featured: !current } : g));
   };
 
   const deleteItem = async (id: string) => {
@@ -105,9 +110,12 @@ export default function GalleryPage() {
                       <div className="flex justify-between items-start">
                         <div>
                           <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                          <p className="text-gray-500 text-xs mt-1">{item.category}</p>
+                          <p className="text-gray-500 text-xs mt-1">{item.category} {!item.is_featured && <span className="text-yellow-500">• Draft</span>}</p>
                         </div>
                         <div className="flex gap-1">
+                          <button onClick={() => togglePublish(item.id, item.is_featured)} className={`p-1.5 border rounded-lg transition-all ${item.is_featured ? 'bg-green-500/10 border-green-500/30 hover:bg-green-500/20' : 'bg-gray-500/10 border-gray-500/30 hover:bg-gray-500/20'}`} title={item.is_featured ? 'Unpublish' : 'Publish'}>
+                            {item.is_featured ? <Eye className="h-3.5 w-3.5 text-green-400" /> : <EyeOff className="h-3.5 w-3.5 text-gray-400" />}
+                          </button>
                           <button onClick={() => { setEditing(item.id); setEditForm({ title: item.title, description: item.description || '', image_url: item.image_url, category: item.category }); }} className="p-1.5 bg-purple-500/10 border border-purple-500/30 rounded-lg hover:bg-purple-500/20">
                             <Pencil className="h-3.5 w-3.5 text-purple-400" />
                           </button>

@@ -4,6 +4,7 @@ import Hero from '@/components/sections/Hero';
 import Services from '@/components/sections/Services';
 import Gallery from '@/components/sections/Gallery';
 import Reviews from '@/components/sections/Reviews';
+import InstagramPosts from '@/components/sections/InstagramPosts';
 import Contact from '@/components/sections/Contact';
 import Footer from '@/components/layout/Footer';
 
@@ -29,6 +30,7 @@ export default function HomePage() {
         <Services />
         <Gallery />
         <Reviews />
+        <InstagramPosts />
         <Contact />
       </main>
       <Footer />

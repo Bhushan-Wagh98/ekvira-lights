@@ -17,7 +17,13 @@ export default function AdminPage() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    const checkSession = async () => {
+      const { supabase } = await import('@/lib/supabase');
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) router.push(`/${locale}/admin/dashboard`);
+    };
+    checkSession();
+  }, [locale, router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

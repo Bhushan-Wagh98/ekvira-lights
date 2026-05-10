@@ -25,6 +25,7 @@ const Gallery = () => {
       const { data } = await (supabase
         .from('gallery') as any)
         .select('*')
+        .eq('is_featured', true)
         .order('order_index', { ascending: true });
       if (data) setGalleryItems(data);
     };

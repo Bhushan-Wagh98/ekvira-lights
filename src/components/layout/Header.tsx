@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, Globe } from 'lucide-react';
+import { Menu, X, Phone, Globe, Instagram } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -58,6 +58,14 @@ const Header = () => {
               <Globe className="h-4 w-4" />
               <span className="text-sm font-medium">{locale === 'en' ? 'मराठी' : 'English'}</span>
             </button>
+            <a
+              href="https://instagram.com/ekviralights"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 text-gray-400 hover:text-neon-pink transition-colors"
+            >
+              <Instagram className="h-4 w-4" />
+            </a>
             <a
               href={`tel:${process.env.NEXT_PUBLIC_BUSINESS_PHONE}`}
               className="flex items-center space-x-2 bg-neon-purple/10 border border-neon-purple/30 text-neon-purple px-4 py-2 rounded-xl font-semibold hover:bg-neon-purple/20 transition-all"
