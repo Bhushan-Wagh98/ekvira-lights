@@ -1,71 +1,25 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { Instagram, Play, Pause } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 import { cn } from '@/utils';
 import { FadeUp } from '@/components/ui/ScrollAnimations';
 
-const MediaItem = ({ post }: { post: any }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const isVideo = post.media_type === 'video' || /\.(mp4|webm|mov)$/i.test(post.image_url);
-
-  const togglePlay = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!videoRef.current) return;
-    if (playing) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
-    }
-    setPlaying(!playing);
-  };
-
-  if (isVideo) {
-    return (
-      <div className="relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-neon-pink/50 transition-all">
-        <video
-          ref={videoRef}
-          src={post.image_url}
-          className="w-full h-full object-cover"
-          loop
-          muted
-          playsInline
-          poster={post.thumbnail_url || undefined}
-        />
-        <button
-          onClick={togglePlay}
-          className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
-        >
-          {playing ? (
-            <Pause className="h-10 w-10 text-white drop-shadow-lg" />
-          ) : (
-            <Play className="h-10 w-10 text-white drop-shadow-lg" />
-          )}
-        </button>
-        {post.caption && (
-          <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
-            <p className="text-white text-xs truncate">{post.caption}</p>
-          </div>
-        )}
-      </div>
-    );
-  }
+const InstagramEmbed = ({ url }: { url: string }) => {
+  // Convert any instagram URL to embed URL
+  const embedUrl = url.replace(/\?.*$/, '') + 'embed';
 
   return (
-    <a
-      href={post.post_url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-neon-pink/50 transition-all"
-    >
-      <img src={post.image_url} alt={post.caption || 'Instagram'} className="w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-        <Instagram className="h-8 w-8 text-white" />
-      </div>
-    </a>
+    <div className="rounded-xl overflow-hidden border border-white/10 hover:border-neon-pink/50 transition-all">
+      <iframe
+        src={embedUrl}
+        className="w-full aspect-[4/5] border-0"
+        allowFullScreen
+        loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+      />
+    </div>
   );
 };
 
@@ -111,9 +65,9 @@ const InstagramPosts = () => {
           </div>
         </FadeUp>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
-            <MediaItem key={post.id} post={post} />
+            <InstagramEmbed key={post.id} url={post.post_url} />
           ))}
         </div>
 

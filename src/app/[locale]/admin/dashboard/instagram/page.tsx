@@ -8,7 +8,7 @@ export default function InstagramPage() {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ post_url: '', image_url: '', caption: '', media_type: 'image' });
+  const [postUrl, setPostUrl] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   useEffect(() => {
@@ -20,11 +20,15 @@ export default function InstagramPage() {
 
   const addPost = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await (supabase.from('instagram_posts') as any).insert({ ...form, is_active: true });
+    const { error } = await (supabase.from('instagram_posts') as any).insert({
+      post_url: postUrl,
+      image_url: postUrl,
+      is_active: true,
+    });
     if (!error) {
       const { data } = await supabase.from('instagram_posts').select('*').order('created_at', { ascending: false });
       if (data) setPosts(data);
-      setForm({ post_url: '', image_url: '', caption: '', media_type: 'image' });
+      setPostUrl('');
       setShowForm(false);
     }
   };
@@ -34,8 +38,6 @@ export default function InstagramPage() {
     setPosts(prev => prev.filter(p => p.id !== id));
     setDeleteConfirm(null);
   };
-
-  const inputClass = "w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-purple-500/50 focus:outline-none";
 
   return (
     <>
@@ -51,15 +53,15 @@ export default function InstagramPage() {
 
         {showForm && (
           <form onSubmit={addPost} className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <select value={form.media_type} onChange={(e) => setForm(p => ({ ...p, media_type: e.target.value }))} className={inputClass}>
-                <option value="image" className="bg-gray-900">Photo</option>
-                <option value="video" className="bg-gray-900">Video</option>
-              </select>
-              <input type="text" placeholder="Instagram Post URL" value={form.post_url} onChange={(e) => setForm(p => ({ ...p, post_url: e.target.value }))} required className={inputClass} />
-            </div>
-            <input type="text" placeholder={form.media_type === 'video' ? 'Video URL (.mp4, .webm)' : 'Image URL'} value={form.image_url} onChange={(e) => setForm(p => ({ ...p, image_url: e.target.value }))} required className={inputClass} />
-            <input type="text" placeholder="Caption (optional)" value={form.caption} onChange={(e) => setForm(p => ({ ...p, caption: e.target.value }))} className={inputClass} />
+            <p className="text-gray-400 text-xs">Paste any Instagram post or reel URL. It will be embedded directly on the site.</p>
+            <input
+              type="text"
+              placeholder="https://www.instagram.com/reel/... or https://www.instagram.com/p/..."
+              value={postUrl}
+              onChange={(e) => setPostUrl(e.target.value)}
+              required
+              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-purple-500/50 focus:outline-none"
+            />
             <button type="submit" className="px-6 py-3 rounded-xl font-semibold text-white text-sm" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>Add Post</button>
           </form>
         )}
@@ -67,24 +69,17 @@ export default function InstagramPage() {
         {posts.length === 0 ? (
           <div className="bg-white/5 border border-white/10 rounded-xl p-8 text-center text-gray-500">No Instagram posts yet.</div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {posts.map((post) => (
-              <div key={post.id} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden group">
-                <a href={post.post_url} target="_blank" rel="noopener noreferrer" className="block aspect-square relative">
-                  {post.image_url.startsWith('http') ? (
-                    <img src={post.image_url} alt={post.caption || 'Instagram post'} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-purple-500/20 to-pink-500/10 flex items-center justify-center">
-                      <Instagram className="h-8 w-8 text-gray-600" />
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <Instagram className="h-6 w-6 text-white" />
+              <div key={post.id} className="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+                <div className="p-4 flex justify-between items-center">
+                  <div className="flex items-center space-x-2 min-w-0">
+                    <Instagram className="h-4 w-4 text-pink-400 flex-shrink-0" />
+                    <a href={post.post_url} target="_blank" rel="noopener noreferrer" className="text-gray-300 text-xs truncate hover:text-white">
+                      {post.post_url}
+                    </a>
                   </div>
-                </a>
-                <div className="p-3 flex justify-between items-center">
-                  <p className="text-gray-400 text-xs truncate flex-1">{post.caption || 'No caption'}</p>
-                  <button onClick={() => setDeleteConfirm(post.id)} className="p-1.5 bg-red-500/10 border border-red-500/30 rounded-lg hover:bg-red-500/20 ml-2">
+                  <button onClick={() => setDeleteConfirm(post.id)} className="p-1.5 bg-red-500/10 border border-red-500/30 rounded-lg hover:bg-red-500/20 ml-2 flex-shrink-0">
                     <Trash2 className="h-3.5 w-3.5 text-red-400" />
                   </button>
                 </div>
