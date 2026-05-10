@@ -13,14 +13,17 @@ export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    setMounted(true);
     const checkSession = async () => {
       const { supabase } = await import('@/lib/supabase');
       const { data: { session } } = await supabase.auth.getSession();
-      if (session) router.push(`/${locale}/admin/dashboard`);
+      if (session) {
+        router.push(`/${locale}/admin/dashboard`);
+      } else {
+        setChecking(false);
+      }
     };
     checkSession();
   }, [locale, router]);
@@ -76,7 +79,13 @@ export default function AdminPage() {
     }
   };
 
-  if (!mounted) return null;
+  if (checking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'hsl(240, 10%, 4%)' }}>
+        <div className="w-8 h-8 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'hsl(240, 10%, 4%)' }}>
